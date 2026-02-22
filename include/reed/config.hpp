@@ -8,7 +8,7 @@ namespace reed {
 
 struct Config {
   std::string port;  // Empty = auto-detect
-  int brightness = 100;
+  int brightness = 75;  //default lower than max setting to reduce burn-in risk on display
   int keepalive_interval = 10;
 };
 
@@ -17,7 +17,7 @@ struct DisplayState {
   std::string ratio = "2:1";
   std::string screen_mode = "Full Screen";
   std::string play_mode = "Single";
-  int brightness = 100;
+  int brightness = 75;  // default lower than max setting to reduce burn-in risk on the display
 };
 
 class ConfigManager {
