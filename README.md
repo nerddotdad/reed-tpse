@@ -66,7 +66,7 @@ If Qt6 is installed, CMake also builds and installs:
 reed-tpse-gui
 ```
 
-## Usage
+## CLI
 
 ```bash
 # Upload media to device
@@ -94,7 +94,7 @@ reed-tpse daemon stop            # Stop daemon
 reed-tpse daemon status          # Check daemon status
 ```
 
-### GUI
+## GUI
 
 ```bash
 reed-tpse-gui
