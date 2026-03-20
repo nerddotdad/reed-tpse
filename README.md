@@ -143,6 +143,11 @@ The Tryx Panorama SE exposes:
 
 The device requires periodic keepalive (~60s timeout) or it reverts to the default screen. The daemon runs in the background (~1MB RAM, negligible CPU, I bet you could run this on a potato and not notice it) and handles this automatically.
 
+## Device reference
+
+Detailed hardware and ADB capability profile for the currently characterized device:
+- [`DEVICE_REFERENCE.md`](DEVICE_REFERENCE.md)
+
 ## Tested on
 
 | Distro | Kernel | CPU | GPU | Contributor |
