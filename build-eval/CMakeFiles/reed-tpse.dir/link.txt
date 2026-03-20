@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/reed-tpse.dir/link.d "CMakeFiles/reed-tpse.dir/cli/main.cpp.o" -o reed-tpse  libreed.a

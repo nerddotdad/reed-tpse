@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/reed-tpse-gui.dir/link.d "CMakeFiles/reed-tpse-gui.dir/gui/main.cpp.o" -o reed-tpse-gui  libreed.a /usr/lib/libQt6Widgets.so.6.10.2 /usr/lib/libQt6Gui.so.6.10.2 /usr/lib/libGLX.so /usr/lib/libOpenGL.so /usr/lib/libQt6Core.so.6.10.2
