@@ -10,6 +10,7 @@
 #include "reed/config.hpp"
 #include "reed/device.hpp"
 #include "reed/media.hpp"
+#include "reed/panel.hpp"
 
 namespace fs = std::filesystem;
 
@@ -39,7 +40,9 @@ static void print_usage(const char* prog) {
          "  -p, --port <path>       Serial port (auto-detected if not "
          "specified)\n"
          "  -v, --verbose           Verbose output\n"
-         "  --ratio <2:1|1:1>       Display ratio (default: 2:1)\n"
+         "  --ratio <2:1|1:1>       Display ratio in device JSON (default: "
+         +
+         std::string(reed::panel::kDeviceJsonRatio) + ")\n"
          "  --brightness <0-100>    Set brightness with display command\n"
          "  --keepalive             Stay running with keepalive (default: exit)\n"
          "  --foreground            Run daemon in foreground\n";
@@ -368,7 +371,7 @@ int main(int argc, char* argv[]) {
 
   std::string port = config.port;
   bool verbose = false;
-  std::string ratio = "2:1";
+  std::string ratio = reed::panel::kDeviceJsonRatio;
   int brightness = config.brightness;
   bool keepalive = false;
   bool foreground = false;

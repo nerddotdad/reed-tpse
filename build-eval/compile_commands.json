@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++  -I/home/itzteajay/Programs/reed-tpse/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -o CMakeFiles/reed.dir/src/protocol.cpp.o -c /home/itzteajay/Programs/reed-tpse/src/protocol.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/src/protocol.cpp",
+  "output": "CMakeFiles/reed.dir/src/protocol.cpp.o"
+},
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++  -I/home/itzteajay/Programs/reed-tpse/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -o CMakeFiles/reed.dir/src/device.cpp.o -c /home/itzteajay/Programs/reed-tpse/src/device.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/src/device.cpp",
+  "output": "CMakeFiles/reed.dir/src/device.cpp.o"
+},
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++  -I/home/itzteajay/Programs/reed-tpse/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -o CMakeFiles/reed.dir/src/adb.cpp.o -c /home/itzteajay/Programs/reed-tpse/src/adb.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/src/adb.cpp",
+  "output": "CMakeFiles/reed.dir/src/adb.cpp.o"
+},
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++  -I/home/itzteajay/Programs/reed-tpse/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -o CMakeFiles/reed.dir/src/media.cpp.o -c /home/itzteajay/Programs/reed-tpse/src/media.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/src/media.cpp",
+  "output": "CMakeFiles/reed.dir/src/media.cpp.o"
+},
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++  -I/home/itzteajay/Programs/reed-tpse/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -o CMakeFiles/reed.dir/src/config.cpp.o -c /home/itzteajay/Programs/reed-tpse/src/config.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/src/config.cpp",
+  "output": "CMakeFiles/reed.dir/src/config.cpp.o"
+},
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++  -I/home/itzteajay/Programs/reed-tpse/include -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -o CMakeFiles/reed-tpse.dir/cli/main.cpp.o -c /home/itzteajay/Programs/reed-tpse/cli/main.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/cli/main.cpp",
+  "output": "CMakeFiles/reed-tpse.dir/cli/main.cpp.o"
+},
+{
+  "directory": "/home/itzteajay/Programs/reed-tpse/build-eval",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/itzteajay/Programs/reed-tpse/include -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6 -isystem /usr/include/qt6/QtCore -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -O3 -DNDEBUG -std=gnu++17 -Wall -Wextra -Wpedantic -O2 -mno-direct-extern-access -o CMakeFiles/reed-tpse-gui.dir/gui/main.cpp.o -c /home/itzteajay/Programs/reed-tpse/gui/main.cpp",
+  "file": "/home/itzteajay/Programs/reed-tpse/gui/main.cpp",
+  "output": "CMakeFiles/reed-tpse-gui.dir/gui/main.cpp.o"
+}
+]

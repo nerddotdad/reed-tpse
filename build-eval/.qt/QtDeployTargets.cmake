@@ -1,0 +1,6 @@
+set(__QT_DEPLOY_TARGET_reed_FILE /home/itzteajay/Programs/reed-tpse/build-eval/libreed.a)
+set(__QT_DEPLOY_TARGET_reed_TYPE STATIC_LIBRARY)
+set(__QT_DEPLOY_TARGET_reed-tpse_FILE /home/itzteajay/Programs/reed-tpse/build-eval/reed-tpse)
+set(__QT_DEPLOY_TARGET_reed-tpse_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_reed-tpse-gui_FILE /home/itzteajay/Programs/reed-tpse/build-eval/reed-tpse-gui)
+set(__QT_DEPLOY_TARGET_reed-tpse-gui_TYPE EXECUTABLE)

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libreed.a CMakeFiles/reed.dir/src/protocol.cpp.o CMakeFiles/reed.dir/src/device.cpp.o CMakeFiles/reed.dir/src/adb.cpp.o CMakeFiles/reed.dir/src/media.cpp.o CMakeFiles/reed.dir/src/config.cpp.o
+/usr/bin/ranlib libreed.a

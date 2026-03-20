@@ -29,6 +29,7 @@ I believe the stats features bove (like CPU stats) should not be too difficult, 
 **Build:**
 - CMake >= 3.16
 - C++17 compiler (GCC 8+ / Clang 7+)
+- Qt6 Widgets (optional, only required for `reed-tpse-gui`)
 
 **Runtime:**
 - `adb` - for file transfer (android-tools on Arch, adb on Debian/Ubuntu)
@@ -46,6 +47,12 @@ mkdir build && cd build
 cmake ..
 make
 sudo make install
+```
+
+If Qt6 is installed, CMake also builds and installs:
+
+```bash
+reed-tpse-gui
 ```
 
 ## Usage
@@ -75,6 +82,23 @@ reed-tpse daemon start           # Start background keepalive
 reed-tpse daemon stop            # Stop daemon
 reed-tpse daemon status          # Check daemon status
 ```
+
+### GUI
+
+```bash
+reed-tpse-gui
+```
+
+The GUI covers CLI operations and adds:
+- **Settings…** — environment/health, USB port, **media cache** (open/clear), **Device Info**, systemd daemon, operation log
+- **Apply Display** sends layout + **brightness** (spinbox value)
+- Underlay: **click the color swatch** to pick a color
+- drag files onto the **Device Media** grid to upload (ADB)
+- media preview grid (pulled/cache thumbnails) + delete
+- display/ratio/brightness controls
+- device dropdown + manual port override
+- systemd user service controls
+- ratio-aware selection validation (`2:1` => 1 item, `1:1` => 2 items for device JSON). Composed output is **2240×1080 @ 60Hz** with **2:1 DAR + SAR 27/28** in the file to match firmware `ratio` and reduce letterboxing.
 
 ## Configuration
 
