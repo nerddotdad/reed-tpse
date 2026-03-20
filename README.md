@@ -12,12 +12,16 @@ https://github.com/user-attachments/assets/1bc87fa9-cde9-4fd5-ab35-a1a15152c467
 
 ## Currently supported features
 
-- Upload images, videos, and GIFs (auto-converts to MP4)
+- CLI + Qt6 GUI frontends backed by the same core library
+- Upload images, videos, and GIFs to device media storage
+- Split canvas mode (2 slots) and fullscreen canvas mode
+- Interactive crop/position controls for composed output
+- Underlay color composition for GIF/image alpha workflows
 - Set display content and brightness
 - List and delete media files on device
 - systemd user service for persistent display across reboots
-- Auto-detects device (scans /dev/ttyACM*)
-- Minimal dependencies (picojson header-only)
+- Auto-detect device ports (`/dev/ttyACM*`) with manual override
+- On-device media preview grid with local cache + thumbnail cache
 
 ## TODO
 
@@ -39,7 +43,8 @@ I believe the stats features bove (like CPU stats) should not be too difficult, 
 
 **Runtime:**
 - `adb` - for file transfer (android-tools on Arch, adb on Debian/Ubuntu)
-- `ffmpeg` - for GIF to MP4 conversion (.gif don't seem to work, so we convert any .gif uploaded to mp4 under-the-hood)
+- `ffmpeg` - used by GUI composition/thumbnail generation and GIF/image compose paths
+- `ffprobe` - used by GUI to probe media duration/dimensions before composition
 
 **Permissions:**
 - User must be in `uucp` group (Arch) or `dialout` (Debian/Ubuntu) for serial access
@@ -96,15 +101,21 @@ reed-tpse-gui
 ```
 
 The GUI covers CLI operations and adds:
-- **Settings…** — environment/health, USB port, **media cache** (open/clear), **Device Info**, systemd daemon, operation log
-- **Apply Display** sends layout + **brightness** (spinbox value)
-- Underlay: **click the color swatch** to pick a color
-- drag files onto the **Device Media** grid to upload (ADB)
-- media preview grid (pulled/cache thumbnails) + delete
-- display/ratio/brightness controls
-- device dropdown + manual port override
-- systemd user service controls
-- ratio-aware selection validation (`2:1` => 1 item, `1:1` => 2 items for device JSON). Composed output is **2240×1080 @ 60Hz** with **2:1 DAR + SAR 27/28** in the file to match firmware `ratio` and reduce letterboxing.
+- **Split Canvas** (Left + Right slots): drag media from the device grid into each slot, then apply as one composed output
+- **Fullscreen Canvas** (single slot): drag one media item and apply directly
+- **Interactive crop preview** per slot: drag to reposition crop area, mouse wheel to zoom crop
+- **Underlay color swatch**: choose compose background color used for alpha/GIF/image paths
+- **Apply Display** sends selected/composed media + brightness
+- Drag files from your file manager onto **Device Media Files** to upload (ADB)
+- Device media preview grid with thumbnails (cached locally), multi-select delete, refresh
+- **Settings…** dialog with:
+  - Environment/health checks (groups, ADB, serial access, service state, storage)
+  - Device selection (`/dev/ttyACM*`) + manual port override + save
+  - Media cache utilities (open/clear)
+  - Device Info (USB handshake metadata)
+  - systemd user service controls (start/stop/restart/enable/status + journal logs)
+  - Operation log pane
+- GUI compose output targets **2240×1080 @ 60Hz** and writes stream tags for **2:1 DAR + SAR 27/28** to align with firmware `ratio` handling and reduce letterboxing.
 
 ## Configuration
 
@@ -137,7 +148,7 @@ reed-tpse/
 └── systemd/           # systemd user service
 ```
 
-The core functionality is in `libreed.a`. The CLI links against it. Future GUI (maybe in v2.0.0?) will also link against the same library.
+The core functionality is in `libreed.a`. Both the CLI (`reed-tpse`) and GUI (`reed-tpse-gui`) link against the same library.
 
 ## How it works
 
