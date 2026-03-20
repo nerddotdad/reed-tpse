@@ -47,6 +47,13 @@ endif()
 install(TARGETS reed-tpse RUNTIME DESTINATION bin)
 if(Qt6_FOUND)
     install(TARGETS reed-tpse-gui RUNTIME DESTINATION bin)
+    install(FILES packaging/reed-tpse-gui.desktop
+        DESTINATION share/applications
+    )
+    install(FILES packaging/reed-tpse.png
+        DESTINATION share/icons/hicolor/256x256/apps
+        RENAME reed-tpse.png
+    )
 endif()
 install(TARGETS reed
     ARCHIVE DESTINATION lib

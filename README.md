@@ -66,6 +66,16 @@ If Qt6 is installed, CMake also builds and installs:
 reed-tpse-gui
 ```
 
+### Desktop launcher (applications menu)
+
+The install now includes a `.desktop` launcher and icon for the GUI.
+
+```bash
+sudo cmake --install build
+```
+
+After install, search for **Reed TPSE GUI** in your applications menu.
+
 ## CLI
 
 ```bash
