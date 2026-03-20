@@ -4,6 +4,12 @@ Linux CLI for Tryx Panorama SE AIO cooler display, reverse-engineered protocol, 
 
 https://github.com/user-attachments/assets/1bc87fa9-cde9-4fd5-ab35-a1a15152c467
 
+## GUI
+
+![main](screenshots/main.png)
+
+![settings](screenshots/settings.png)
+
 ## Currently supported features
 
 - Upload images, videos, and GIFs (auto-converts to MP4)
