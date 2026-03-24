@@ -46,9 +46,41 @@ I believe the stats features bove (like CPU stats) should not be too difficult, 
 - `ffmpeg` - used by GUI composition/thumbnail generation and GIF/image compose paths
 - `ffprobe` - used by GUI to probe media duration/dimensions before composition
 
-**Permissions:**
-- User must be in `uucp` group (Arch) or `dialout` (Debian/Ubuntu) for serial access
-- Or run with sudo
+**Serial device permissions (`/dev/ttyACM*`):**
+
+The panel speaks **USB CDC ACM**, which appears as `/dev/ttyACM0` (or similar). By default those nodes are **group-owned** and not world-writable, so your user must be in the right group or opens will fail with *Permission denied* and the GUI **Settings → Environment / Health** will show **Serial access: No RW access**.
+
+| Distro family | Typical group | Notes |
+|---------------|---------------|--------|
+| Arch Linux, CachyOS, Manjaro, EndeavourOS | `uucp` | `udev` rules assign `ttyACM` devices to this group on many Arch-based installs |
+| Debian, Ubuntu, Mint | `dialout` | Same role: serial port access |
+| Fedora | often `dialout` | Check `ls -l /dev/ttyACM0` for the owning group |
+
+**Add your user to the group** (pick the one that matches your distro):
+
+```bash
+# Arch / Arch-based (e.g. CachyOS)
+sudo usermod -aG uucp "$USER"
+
+# Debian / Ubuntu
+sudo usermod -aG dialout "$USER"
+```
+
+Then **log out and back in** (or reboot). Groups are applied at login; `newgrp uucp` works for a quick test in a new shell but a full session refresh is more reliable. Verify:
+
+```bash
+id -nG | tr ' ' '\n' | grep -E '^(uucp|dialout)$' || echo "Add uucp or dialout and re-login"
+```
+
+**systemd user service:** `reed-tpse.service` runs as **your user**, not root. It only has the same supplementary groups as your interactive session after you’ve re-logged in. If the CLI works in a terminal but the daemon cannot open the port, your session likely still lacks the group—fix the membership and re-login, then restart the service:
+
+```bash
+systemctl --user restart reed-tpse.service
+```
+
+**Avoid relying on `sudo`** for normal use: it is awkward for the GUI and the user service is not meant to run as root.
+
+**ADB** (upload/list/delete) is separate; it uses your user’s `adb` setup and does not depend on `uucp`/`dialout`.
 
 ## Build
 
