@@ -664,6 +664,53 @@ class MainWindow : public QMainWindow {
 
   void log_line(const QString& line) { log_box_->appendPlainText(line); }
 
+  void append_log_section(const QString& title, const CommandResult& result) {
+    log_line("=== " + title + " ===");
+    log_line("exit=" + QString::number(result.exit_code));
+    const QString out = result.output.trimmed();
+    if (out.isEmpty()) {
+      log_line("(no entries)");
+    } else {
+      log_line(out);
+    }
+    log_line("");
+  }
+
+  void append_service_diagnostics_logs() {
+    log_line("Collecting service diagnostics logs...");
+
+    const CommandResult svc_status = run_command(
+        "systemctl", {"--user", "status", "reed-tpse.service", "--no-pager"}, 20000);
+    append_log_section("Service Status", svc_status);
+
+    const CommandResult svc_logs =
+        run_command("journalctl",
+                    {"--user", "-u", "reed-tpse.service", "--since", "48 hours ago",
+                     "--no-pager", "-n", "300"},
+                    20000);
+    append_log_section("Service Journal (48h)", svc_logs);
+
+    const CommandResult svc_focus = run_command(
+        "journalctl",
+        {"--user", "-u", "reed-tpse.service", "--since", "48 hours ago", "--no-pager",
+         "-n", "300", "--grep",
+         "Keepalive handshake failed|Connection appears stale|Attempting reconnect|"
+         "Reconnected and restored display state|Handshake failed after reconnect|"
+         "Failed to restore display state"},
+        20000);
+    append_log_section("Service Recovery Events (filtered)", svc_focus);
+
+    const CommandResult kernel_focus = run_command(
+        "journalctl",
+        {"-k", "--since", "48 hours ago", "--no-pager", "-n", "500", "--grep",
+         "ttyACM|cdc_acm|usb .*disconnect|reset .*USB|suspend|resume|PM:|error -71|"
+         "error -32|unable to enumerate USB device"},
+        20000);
+    append_log_section("Kernel USB/Idle Events (filtered)", kernel_focus);
+
+    log_line("Diagnostics log capture complete.");
+  }
+
   void clear_media_cache_clicked() {
     const QString path = QDir::toNativeSeparators(media_cache_dir_);
     const auto ret = QMessageBox::question(
@@ -983,11 +1030,7 @@ class MainWindow : public QMainWindow {
       refresh_service_status();
     });
     connect(logs_btn, &QPushButton::clicked, this, [this]() {
-      CommandResult result =
-          run_command("journalctl", {"--user", "-u", "reed-tpse.service", "-b",
-                                     "--no-pager", "-n", "100"});
-      log_line("journalctl exit=" + QString::number(result.exit_code));
-      log_line(result.output.trimmed());
+      append_service_diagnostics_logs();
     });
 
     layout->addWidget(service_start_btn_);
